@@ -1,13 +1,16 @@
-# Weatherford Local Resale & Thrift App Demo — Sales v5
+# Weatherford Local Resale & Thrift App Demo — Sales v6
 
 A customer-first static web app demo built to feel like a believable resale shopping experience on the front end, with a strong owner dashboard on the admin side.
 
-## What changed in v5
+## What changed in v6
 - Removed the meta sales-deck style intro screen
 - Opened the app directly into a real-feeling customer shopping experience
 - Reworked the customer side to feel less like a dashboard and more like a store
 - Replaced cluttered product presentation with cleaner curated demo inventory
 - Tightened the owner/admin side so it still sells the operational value
+- Improved customer utility screens: orders, messages, and account
+- Reworked admin settings so it reads like a real product screen instead of a pitch panel
+- Softened the opportunity screen so it feels more like owner upside than an internal sales slide
 
 ## What this includes
 - Customer shopping home

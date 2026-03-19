@@ -1,4 +1,4 @@
-const STORAGE_KEY = "wlrt-app-demo-v5-realshop";
+const STORAGE_KEY = "wlrt-app-demo-v6-polished";
 const APP_NAME = "Weatherford Local Resale & Thrift";
 const STORE_ADDRESS = "1812 Fort Worth Hwy, Weatherford, TX 76087";
 const MESSENGER_URL = "https://www.facebook.com/profile.php?id=61587956354387";
@@ -340,8 +340,24 @@ function defaultData() {
         from: "Store Team",
         audience: "customer",
         subject: "Offer received",
-        body: "Thanks for your offer. We review offers quickly and usually reply the same day.",
+        body: "Thanks for your offer on the Vintage Brass Lamp. We review offers quickly and usually reply the same day.",
         time: "Yesterday"
+      },
+      {
+        id: nextId("msg"),
+        from: "Store Team",
+        audience: "customer",
+        subject: "Shipping update",
+        body: "Your Levi Denim Jacket order has shipped. Tracking was sent to the email on file.",
+        time: "2 days ago"
+      },
+      {
+        id: nextId("msg"),
+        from: "Store Team",
+        audience: "customer",
+        subject: "Counter offer sent",
+        body: "We can do $62 on the Nintendo Wii Bundle if you want to complete checkout today.",
+        time: "3 days ago"
       },
       {
         id: nextId("msg"),
@@ -358,6 +374,14 @@ function defaultData() {
         subject: "Interested in the sideboard",
         body: "Is the walnut sideboard still available for pickup this weekend?",
         time: "2 hours ago"
+      },
+      {
+        id: nextId("msg"),
+        from: "Maria Carter",
+        audience: "admin",
+        subject: "Offer on Vintage Brass Lamp",
+        body: "Would you take $40 if I can pick it up this afternoon?",
+        time: "Yesterday"
       }
     ],
     customerProfile: {
@@ -1283,11 +1307,13 @@ function renderCustomerShop() {
 
 
 function renderOrderCard(order) {
+  const firstItem = getInventoryById(order.itemIds[0]);
   const items = order.itemIds.map((id) => getInventoryById(id)?.name || "Inventory item").join(", ");
   const reorderId = order.itemIds[0];
   return `
-    <article class="order-card">
-      <div class="row-between">
+    <article class="order-card utility-order-card-item">
+      <div class="order-card-head">
+        ${firstItem ? `<img class="order-thumb" src="${escapeHtml(firstItem.image)}" alt="${escapeHtml(firstItem.name)}" />` : ""}
         <div>
           <h3>${escapeHtml(order.id)}</h3>
           <p>${escapeHtml(items)}</p>
@@ -1298,25 +1324,35 @@ function renderOrderCard(order) {
         <div class="detail-item"><div class="detail-label">Total</div><strong>${currency(order.total)}</strong></div>
         <div class="detail-item"><div class="detail-label">Fulfillment</div><strong>${escapeHtml(order.fulfillment)}</strong></div>
         <div class="detail-item"><div class="detail-label">Placed</div><strong>${escapeHtml(order.date)}</strong></div>
+        <div class="detail-item"><div class="detail-label">Status note</div><strong>${escapeHtml(order.note)}</strong></div>
       </div>
       <div class="product-actions" style="margin-top:16px;">
         <button class="btn btn-outline btn-sm" data-action="reorder-item" data-id="${reorderId}">Buy similar</button>
-        <a class="btn btn-secondary btn-sm" href="${MESSENGER_URL}" target="_blank" rel="noreferrer">Message Store</a>
+        <button class="btn btn-secondary btn-sm" data-action="set-customer-view" data-view="messages">View updates</button>
       </div>
     </article>
   `;
 }
 
 function renderCustomerOrders() {
+  const pickupCount = data.orders.filter((order) => order.fulfillment === "Pickup").length;
+  const deliveredCount = data.orders.filter((order) => order.status === "Delivered").length;
+  const openCount = data.orders.filter((order) => order.status !== "Delivered").length;
   return `
-    <section class="card">
+    <section class="card section-spaced">
       <div class="section-head">
         <div>
           <p class="eyebrow">Order history</p>
           <h2>Everything in one place.</h2>
+          <p class="supporting">Track what is ready for pickup, what shipped, and what you may want to buy again.</p>
         </div>
       </div>
-      <div class="order-grid">
+      <div class="summary-grid compact-summary-grid" style="margin-bottom:18px;">
+        <div class="summary-card"><span>Open orders</span><strong>${openCount}</strong><small>Still moving through pickup or shipping</small></div>
+        <div class="summary-card"><span>Pickup orders</span><strong>${pickupCount}</strong><small>Easy to coordinate without extra back-and-forth</small></div>
+        <div class="summary-card"><span>Delivered</span><strong>${deliveredCount}</strong><small>Past purchases stay in the account for repeat buying</small></div>
+      </div>
+      <div class="order-grid utility-order-grid">
         ${data.orders.map(renderOrderCard).join("")}
       </div>
     </section>
@@ -1325,32 +1361,60 @@ function renderCustomerOrders() {
 
 function renderCustomerMessages() {
   const messages = data.messages.filter((entry) => entry.audience === "customer");
+  const selected = messages[0];
   return `
-    <section class="card">
+    <section class="card section-spaced">
       <div class="section-head">
         <div>
           <p class="eyebrow">Message center</p>
           <h2>Offers, updates, and store communication.</h2>
+          <p class="supporting">Keep pickup updates, offer replies, and shipping notices in one place with Messenger as the backup contact option.</p>
         </div>
         <a class="btn btn-secondary btn-sm" href="${MESSENGER_URL}" target="_blank" rel="noreferrer">Open Facebook Messenger</a>
       </div>
-      <div class="message-list">
-        ${messages
-          .map(
-            (message) => `
-              <article class="message-card">
-                <div class="message-item">
+      <div class="message-shell">
+        <div class="thread-list card-subtle">
+          <h3>Recent threads</h3>
+          ${messages
+            .map(
+              (message, index) => `
+                <button class="thread-item ${index === 0 ? "active" : ""}">
                   <div class="avatar">${escapeHtml(message.from.slice(0, 1))}</div>
                   <div>
-                    <h3>${escapeHtml(message.subject)}</h3>
-                    <p><strong>${escapeHtml(message.from)}</strong> • ${escapeHtml(message.time)}</p>
-                    <p style="margin-top:8px;">${escapeHtml(message.body)}</p>
+                    <strong>${escapeHtml(message.subject)}</strong>
+                    <p>${escapeHtml(message.body.slice(0, 76))}${message.body.length > 76 ? "..." : ""}</p>
+                    <small>${escapeHtml(message.time)}</small>
                   </div>
-                </div>
-              </article>
-            `
-          )
-          .join("")}
+                </button>
+              `
+            )
+            .join("")}
+        </div>
+        <div class="thread-panel card-subtle">
+          <div class="thread-panel-head">
+            <div>
+              <p class="eyebrow">Selected conversation</p>
+              <h3>${escapeHtml(selected.subject)}</h3>
+            </div>
+            <span class="badge success">Store reply on file</span>
+          </div>
+          <div class="conversation-stack">
+            <div class="conversation-bubble incoming">
+              <strong>${escapeHtml(selected.from)}</strong>
+              <p>${escapeHtml(selected.body)}</p>
+              <small>${escapeHtml(selected.time)}</small>
+            </div>
+            <div class="conversation-bubble outgoing">
+              <strong>Store Team</strong>
+              <p>${selected.subject === "Your pickup is ready" ? "We have it held at the front counter. Bring a photo ID if someone else is picking up for you." : selected.subject === "Offer received" ? "Thanks for sending an offer. We will either accept, counter, or decline the same day whenever possible." : selected.subject === "Shipping update" ? "Tracking was emailed automatically and will update as soon as the carrier scans the package." : "This item is still available right now. Complete checkout today if you want it held."}</p>
+              <small>Reply template</small>
+            </div>
+          </div>
+          <div class="detail-grid message-support-grid">
+            <div class="small-panel"><strong>Pickup support</strong><span>Customers can confirm timing before they drive over.</span></div>
+            <div class="small-panel"><strong>Offer follow-up</strong><span>Reply to interest without losing the sale in random DMs.</span></div>
+          </div>
+        </div>
       </div>
     </section>
   `;
@@ -1360,8 +1424,8 @@ function renderCustomerAccount() {
   const profile = data.customerProfile;
   const savedItems = data.wishlist.map((id) => getInventoryById(id)).filter(Boolean);
   return `
-    <div class="customer-grid">
-      <section class="card">
+    <div class="customer-grid utility-customer-grid">
+      <section class="card profile-stack">
         <div class="section-head">
           <div>
             <p class="eyebrow">Profile</p>
@@ -1372,8 +1436,21 @@ function renderCustomerAccount() {
         <div class="detail-list">
           <div class="detail-item"><div class="detail-label">Email</div><strong>${escapeHtml(profile.email)}</strong></div>
           <div class="detail-item"><div class="detail-label">Phone</div><strong>${escapeHtml(profile.phone)}</strong></div>
-          <div class="detail-item"><div class="detail-label">Saved payment methods</div><strong>${escapeHtml(profile.savedPayments.join(", "))}</strong></div>
-          <div class="detail-item"><div class="detail-label">Address book</div><strong>${escapeHtml(profile.addresses.join(" • "))}</strong></div>
+        </div>
+        <div class="detail-grid account-panels" style="margin-top:18px;">
+          <div class="small-panel">
+            <strong>Saved payment methods</strong>
+            <span>${escapeHtml(profile.savedPayments.join(" • "))}</span>
+          </div>
+          <div class="small-panel">
+            <strong>Pickup preferences</strong>
+            <span>Primary pickup contact on file plus a local address for checkout speed.</span>
+          </div>
+        </div>
+        <div class="detail-list" style="margin-top:18px;">
+          <div class="detail-item"><div class="detail-label">Address book</div><strong>${escapeHtml(profile.addresses[0])}</strong></div>
+          <div class="detail-item"><div class="detail-label">Store preference</div><strong>Pickup contact on file at store front</strong></div>
+          <div class="detail-item"><div class="detail-label">Recent activity</div><strong>Saved 3 items and placed 3 orders</strong></div>
         </div>
       </section>
       <section class="card">
@@ -1382,8 +1459,32 @@ function renderCustomerAccount() {
             <p class="eyebrow">Saved items</p>
             <h2>Wishlist</h2>
           </div>
+          <span class="badge gold">${savedItems.length} saved</span>
         </div>
-        ${savedItems.length ? `<div class="product-grid" style="grid-template-columns:1fr;">${savedItems.map(renderProductCard).join("")}</div>` : `<div class="empty-state">No saved items yet.</div>`}
+        ${savedItems.length ? `
+          <div class="saved-mini-grid">
+            ${savedItems.map((item) => `
+              <article class="saved-mini-card">
+                <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}" />
+                <div>
+                  <div class="badge-row">
+                    <span class="badge">${escapeHtml(item.category)}</span>
+                    ${item.allowOffer ? '<span class="badge dark">Make offer</span>' : '<span class="badge success">Fixed price</span>'}
+                  </div>
+                  <h3>${escapeHtml(item.name)}</h3>
+                  <p>${escapeHtml(item.fulfillment)} • ${escapeHtml(item.condition)}</p>
+                  <div class="row-between" style="margin-top:10px;">
+                    <strong>${currency(item.price)}</strong>
+                    <div class="product-actions">
+                      <button class="btn btn-outline btn-sm" data-action="view-product" data-id="${item.id}">Details</button>
+                      <button class="btn btn-primary btn-sm" data-action="add-to-cart" data-id="${item.id}">Buy</button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            `).join("")}
+          </div>
+        ` : `<div class="empty-state">No saved items yet.</div>`}
       </section>
     </div>
   `;
@@ -1837,52 +1938,42 @@ function renderAdminOpportunity() {
   return `
     <div class="analytics-grid opportunity-grid">
       <section class="analytics-card opportunity-hero">
-        <div class="section-head"><div><p class="eyebrow">Why this matters</p><h2>This is the money view.</h2></div><span class="badge gold">Sales tool</span></div>
-        <p class="supporting">This screen exists to connect the dots fast: the app is not just about looking modern. It gives customers a cleaner way to buy, gives the store a better way to manage one-of-a-kind inventory, and gives the business a shot at capturing sales that normally die in messages or after-hours browsing.</p>
+        <div class="section-head"><div><p class="eyebrow">Owner upside</p><h2>Where online inventory starts paying off.</h2></div><span class="badge gold">Worth building</span></div>
+        <p class="supporting">This view connects the practical value fast: more of the store is visible at any time, easier checkout removes friction, and inventory no longer depends on people catching the right post at the right moment.</p>
         <div class="quick-grid opportunity-mini-grid" style="margin-top:18px;">
-          <div class="small-panel"><strong>24/7 browsing</strong><span>Customers can shop after the store is closed and still complete a checkout.</span></div>
-          <div class="small-panel"><strong>Less manual back-and-forth</strong><span>Inventory, offers, and order updates stop living in random message threads.</span></div>
-          <div class="small-panel"><strong>Better conversion</strong><span>When someone wants the item, they can buy it before another shopper beats them to it.</span></div>
+          <div class="small-panel"><strong>More visible inventory</strong><span>One-of-a-kind finds can stay shoppable even after business hours.</span></div>
+          <div class="small-panel"><strong>Cleaner operations</strong><span>Offers, orders, payments, and customer questions stop getting scattered.</span></div>
+          <div class="small-panel"><strong>Faster close rate</strong><span>Interested shoppers can check out or make an offer before the item disappears.</span></div>
         </div>
       </section>
 
       <section class="analytics-card">
-        <div class="section-head"><div><p class="eyebrow">Demo assumptions</p><h2>Simple revenue story</h2></div><span class="badge success">Illustrative</span></div>
+        <div class="section-head"><div><p class="eyebrow">Revenue path</p><h2>Simple revenue story</h2></div><span class="badge success">Illustrative</span></div>
         <div class="detail-list">
-          <div class="detail-item"><div><div class="detail-label">Average order in this demo</div><strong>${currency(avgOrder)}</strong></div><span class="badge dark">Based on sample orders</span></div>
-          <div class="detail-item"><div><div class="detail-label">If the app captures 8 extra orders / month</div><strong>${currency(demoLift)} / month</strong></div><span class="badge gold">Small win</span></div>
-          <div class="detail-item"><div><div class="detail-label">If the store turns this into 15 extra orders / month</div><strong>${currency(strongerLift)} / month</strong></div><span class="badge success">More realistic upside</span></div>
-          <div class="detail-item"><div><div class="detail-label">That same 8-order pace across a year</div><strong>${currency(annualLift)} / year</strong></div><span class="badge success">Adds up</span></div>
+          <div class="detail-item"><div><div class="detail-label">Average order in this demo</div><strong>${currency(avgOrder)}</strong></div><span class="badge dark">Sample orders</span></div>
+          <div class="detail-item"><div><div class="detail-label">If the app captures 8 extra orders / month</div><strong>${currency(demoLift)} / month</strong></div><span class="badge gold">Starter lift</span></div>
+          <div class="detail-item"><div><div class="detail-label">If the store turns this into 15 extra orders / month</div><strong>${currency(strongerLift)} / month</strong></div><span class="badge success">Better traction</span></div>
+          <div class="detail-item"><div><div class="detail-label">That same 8-order pace across a year</div><strong>${currency(annualLift)} / year</strong></div><span class="badge success">Real upside</span></div>
         </div>
       </section>
 
       <section class="analytics-card">
-        <div class="section-head"><div><p class="eyebrow">What the app fixes</p><h2>Without this system</h2></div></div>
+        <div class="section-head"><div><p class="eyebrow">Before vs after</p><h2>What changes with the app</h2></div></div>
         <div class="detail-list">
-          <div class="detail-item"><div class="detail-label">Inventory visibility</div><strong>People miss items because they never see the post in time</strong></div>
-          <div class="detail-item"><div class="detail-label">Sales friction</div><strong>Interested buyers wait on replies instead of checking out immediately</strong></div>
-          <div class="detail-item"><div class="detail-label">Operational drag</div><strong>Orders, offers, questions, and payments are scattered across tools</strong></div>
-          <div class="detail-item"><div class="detail-label">No owned customer flow</div><strong>Harder to build repeat buyers and saved-item behavior</strong></div>
+          <div class="detail-item"><div class="detail-label">Without it</div><strong>Inventory gets buried in posts and shoppers wait on replies.</strong></div>
+          <div class="detail-item"><div class="detail-label">With it</div><strong>Listings stay visible, checkout is immediate, and pickup can be coordinated cleanly.</strong></div>
+          <div class="detail-item"><div class="detail-label">Store owner gain</div><strong>Better visibility into what is selling, who is buying, and where demand is coming from.</strong></div>
+          <div class="detail-item"><div class="detail-label">Customer gain</div><strong>Less guesswork, less driving blind, and fewer missed items.</strong></div>
         </div>
       </section>
 
       <section class="analytics-card">
-        <div class="section-head"><div><p class="eyebrow">What the owner gets</p><h2>Core owner benefits</h2></div></div>
+        <div class="section-head"><div><p class="eyebrow">Core benefits</p><h2>What Seth actually gets</h2></div></div>
         <div class="detail-list">
           <div class="detail-item"><div class="detail-label">Inventory control</div><strong>List, edit, feature, or mark sold from one admin dashboard</strong></div>
           <div class="detail-item"><div class="detail-label">Sales control</div><strong>Buy now, make offer, pickup or ship — all in one flow</strong></div>
           <div class="detail-item"><div class="detail-label">Customer visibility</div><strong>See who is buying, what they like, and what they are asking about</strong></div>
-          <div class="detail-item"><div class="detail-label">Stronger first impression</div><strong>The business feels organized, current, and easy to buy from</strong></div>
-        </div>
-      </section>
-
-      <section class="analytics-card" style="grid-column: 1 / -1;">
-        <div class="section-head"><div><p class="eyebrow">Phased rollout</p><h2>How this could become real</h2></div></div>
-        <div class="detail-grid opportunity-phase-grid">
-          <div class="small-panel"><strong>Phase 1</strong><span>Customer storefront, inventory catalog, cart, checkout, pickup/shipping, and a clean admin dashboard.</span></div>
-          <div class="small-panel"><strong>Phase 2</strong><span>Real payments, real product database, image uploads, inventory counts, and order management.</span></div>
-          <div class="small-panel"><strong>Phase 3</strong><span>Customer accounts, saved items, notifications, offers, repeat-buyer flows, and better reporting.</span></div>
-          <div class="small-panel"><strong>Phase 4</strong><span>Staff workflows, barcode/SKU support, deeper automation, and tighter social selling integration.</span></div>
+          <div class="detail-item"><div class="detail-label">Stronger presence</div><strong>The store feels organized, current, and easier to shop from</strong></div>
         </div>
       </section>
     </div>
@@ -1930,10 +2021,11 @@ function renderAdminSettings() {
       <div class="section-head">
         <div>
           <p class="eyebrow">Store settings</p>
-          <h2>Mock controls for the sales pitch.</h2>
+          <h2>Core store preferences.</h2>
+          <p class="supporting">These controls help show how checkout, communication, merchandising, and default listing behavior could be managed from one place.</p>
         </div>
       </div>
-      <div class="settings-grid">
+      <div class="settings-grid polished-settings-grid">
         <article class="settings-card">
           <h3>Fulfillment options</h3>
           <p>Pickup and shipping can both be surfaced in checkout depending on the item.</p>
@@ -1941,16 +2033,22 @@ function renderAdminSettings() {
             <label class="toggle"><input type="checkbox" checked disabled /> Pickup enabled</label>
             <label class="toggle"><input type="checkbox" checked disabled /> Shipping enabled</label>
           </div>
-        </article>
-        <article class="settings-card">
-          <h3>Offer workflow</h3>
-          <p>Items can allow fixed price only or fixed price plus make-offer. That matters in resale.</p>
-          <div class="checkbox-grid" style="margin-top:14px;">
-            <label class="toggle"><input type="checkbox" checked disabled /> Make offers enabled</label>
+          <div class="detail-list" style="margin-top:14px;">
+            <div class="detail-item"><div class="detail-label">Default pickup window</div><strong>Same day or next day</strong></div>
           </div>
         </article>
         <article class="settings-card">
-          <h3>Customer communication</h3>
+          <h3>Offer workflow</h3>
+          <p>Items can allow fixed price only or fixed price plus make-offer depending on category and value.</p>
+          <div class="checkbox-grid" style="margin-top:14px;">
+            <label class="toggle"><input type="checkbox" checked disabled /> Make offers enabled</label>
+          </div>
+          <div class="detail-list" style="margin-top:14px;">
+            <div class="detail-item"><div class="detail-label">Response target</div><strong>Same-day replies whenever possible</strong></div>
+          </div>
+        </article>
+        <article class="settings-card">
+          <h3>Store communication</h3>
           <p>In-app messages plus Facebook Messenger fallback keep the experience local and familiar.</p>
           <div class="detail-list" style="margin-top:14px;">
             <div class="detail-item"><div class="detail-label">Primary contact</div><strong>Facebook Messenger</strong></div>
@@ -1958,9 +2056,12 @@ function renderAdminSettings() {
           </div>
         </article>
         <article class="settings-card">
-          <h3>Reality check</h3>
-          <p>This demo is front-end only right now. A real build would connect inventory, auth, and payments to a backend.</p>
-          <div class="notice" style="margin-top:14px;">That is exactly fine for this stage. The goal is to feel the system, not get buried in technical details.</div>
+          <h3>Catalog defaults</h3>
+          <p>Featured listings and new-arrival flags shape what shoppers see first when they land on the customer side.</p>
+          <div class="detail-list" style="margin-top:14px;">
+            <div class="detail-item"><div class="detail-label">Featured items on home</div><strong>${data.settings.featuredHomeCount}</strong></div>
+            <div class="detail-item"><div class="detail-label">Default listing mode</div><strong>One-of-a-kind resale inventory</strong></div>
+          </div>
         </article>
       </div>
     </section>
