@@ -1,4 +1,4 @@
-const STORAGE_KEY = "wlrt-app-demo-v4-customerfirst";
+const STORAGE_KEY = "wlrt-app-demo-v5-realshop";
 const APP_NAME = "Weatherford Local Resale & Thrift";
 const STORE_ADDRESS = "1812 Fort Worth Hwy, Weatherford, TX 76087";
 const MESSENGER_URL = "https://www.facebook.com/profile.php?id=61587956354387";
@@ -42,163 +42,149 @@ function escapeHtml(value = "") {
     .replace(/'/g, "&#39;");
 }
 
+
 function defaultInventory() {
   return [
     {
-      id: "item-helmet",
-      name: "Cowboys Collectible Helmet",
-      category: "Collectibles",
-      price: 44,
-      condition: "Good",
-      qty: 1,
-      fulfillment: "Pickup or Ship",
-      allowOffer: true,
-      featured: true,
-      isNew: true,
-      status: "Active",
-      image: "assets/images/product-cowboys-helmet.jpg",
-      description: "Vintage-style Cowboys helmet display piece pulled from the current shop floor. Great fit for sports fans, man cave decor, or resale collectors."
-    },
-    {
-      id: "item-hp",
-      name: "Harry Potter Box Set",
-      category: "Collectibles",
-      price: 38,
-      condition: "Very Good",
-      qty: 1,
-      fulfillment: "Pickup or Ship",
-      allowOffer: false,
-      featured: true,
-      isNew: true,
-      status: "Active",
-      image: "assets/images/product-harry-potter.jpg",
-      description: "Collector-style Harry Potter media set presented as a one-off shelf item. Perfect example of the rotating pop-culture inventory the store can list quickly online."
-    },
-    {
-      id: "item-snoopy",
-      name: "Snoopy Ceramic Ashtray",
+      id: "item-lamp",
+      name: "Vintage Brass Lamp",
       category: "Home Decor",
-      price: 22,
-      condition: "Good",
-      qty: 1,
-      fulfillment: "Pickup or Ship",
-      allowOffer: true,
-      featured: false,
-      isNew: true,
-      status: "Active",
-      image: "assets/images/product-snoopy.jpg",
-      description: "Fun vintage Snoopy piece with strong impulse-buy energy. Great example of the quirky, treasure-hunt inventory that makes shoppers keep checking back."
-    },
-    {
-      id: "item-guitar",
-      name: "Guitar Hero Controller Set",
-      category: "Electronics",
-      price: 64,
-      condition: "Good",
+      price: 48,
+      condition: "Very Good",
       qty: 1,
       fulfillment: "Pickup or Ship",
       allowOffer: true,
       featured: true,
-      isNew: false,
+      isNew: true,
       status: "Active",
-      image: "assets/images/product-guitar-hero.jpg",
-      description: "Pair of game controllers shown as one sellable bundle. Strong demo item for shoppers searching gaming gear, party items, or nostalgic electronics."
+      image: "assets/images/product-vintage-lamp.svg",
+      description: "Warm accent lamp with easy vintage appeal. Great example of a one-of-one piece shoppers would want to lock down before driving over."
     },
     {
-      id: "item-tractor",
-      name: "John Deere Toy Tractor",
-      category: "Toys & Games",
-      price: 16,
+      id: "item-pyrex",
+      name: "Pyrex Bowl Set",
+      category: "Housewares",
+      price: 36,
       condition: "Very Good",
-      qty: 2,
+      qty: 1,
       fulfillment: "Pickup or Ship",
       allowOffer: false,
+      featured: true,
+      isNew: true,
+      status: "Active",
+      image: "assets/images/product-pyrex-bowls.svg",
+      description: "Classic kitchen set with giftable, collectible energy. Easy item for shoppers to buy online without a bunch of questions."
+    },
+    {
+      id: "item-western-print",
+      name: "Western Art Print",
+      category: "Collectibles",
+      price: 42,
+      condition: "Good",
+      qty: 1,
+      fulfillment: "Pickup or Ship",
+      allowOffer: true,
       featured: false,
       isNew: true,
       status: "Active",
-      image: "assets/images/product-john-deere.jpg",
-      description: "Farm and tractor pieces move well for gifting and collectors. This shows how the app can handle smaller quantity-based items too."
+      image: "assets/images/product-western-print.svg",
+      description: "Framed western-themed wall art that fits the local market and shows how decor can be merchandised cleanly online."
     },
     {
-      id: "item-camp",
-      name: "Outdoor Camp Bundle",
-      category: "Housewares",
-      price: 89,
-      condition: "Good",
-      qty: 1,
-      fulfillment: "Pickup",
-      allowOffer: true,
-      featured: true,
-      isNew: false,
-      status: "Active",
-      image: "assets/images/product-camping.jpg",
-      description: "Example bundle listing for larger outdoor and seasonal inventory. Great for visualizing pickup-only items with bigger ticket value."
-    },
-    {
-      id: "item-glassware",
-      name: "Vintage Glassware Set",
-      category: "Housewares",
+      id: "item-denim",
+      name: "Levi Denim Jacket",
+      category: "Clothing",
       price: 28,
-      condition: "Very Good",
+      condition: "Good",
       qty: 1,
       fulfillment: "Pickup or Ship",
       allowOffer: false,
       featured: false,
       isNew: true,
       status: "Active",
-      image: "assets/images/product-glassware.jpg",
-      description: "Clean, giftable glassware listing to show how housewares can be merchandised with sharp photos and clear fulfillment options."
+      image: "assets/images/product-denim-jacket.svg",
+      description: "Simple apparel listing for the shopper who wants a quick score without digging through racks first."
     },
     {
-      id: "item-table",
-      name: "Accent Side Table",
-      category: "Furniture",
+      id: "item-wii",
+      name: "Nintendo Wii Bundle",
+      category: "Electronics",
       price: 74,
       condition: "Good",
       qty: 1,
-      fulfillment: "Pickup",
+      fulfillment: "Pickup or Ship",
+      allowOffer: true,
+      featured: true,
+      isNew: false,
+      status: "Active",
+      image: "assets/images/product-wii-bundle.svg",
+      description: "Console bundle with strong nostalgia and fast-moving resale appeal. Good demo item for offers and quick checkout."
+    },
+    {
+      id: "item-cast-iron",
+      name: "Cast Iron Set",
+      category: "Housewares",
+      price: 54,
+      condition: "Good",
+      qty: 1,
+      fulfillment: "Pickup or Ship",
       allowOffer: true,
       featured: false,
       isNew: false,
       status: "Active",
-      image: "assets/images/product-side-table.jpg",
-      description: "Furniture piece included to show how larger in-store inventory could be listed online with pickup-first checkout and make-offer flexibility."
+      image: "assets/images/product-cast-iron.svg",
+      description: "Practical, local-market housewares listing that works well for both impulse buying and pickup reservations."
     },
     {
-      id: "item-charlie",
-      name: "Charlie Brown Display Figure",
-      category: "Collectibles",
-      price: 18,
+      id: "item-chair",
+      name: "Accent Chair",
+      category: "Furniture",
+      price: 68,
       condition: "Good",
+      qty: 1,
+      fulfillment: "Pickup",
+      allowOffer: true,
+      featured: true,
+      isNew: true,
+      status: "Active",
+      image: "assets/images/product-accent-chair.svg",
+      description: "Pickup-first furniture piece meant to show how larger floor inventory can be listed online without getting messy."
+    },
+    {
+      id: "item-guitar",
+      name: "Guitar Bundle",
+      category: "Collectibles",
+      price: 89,
+      condition: "Good",
+      qty: 1,
+      fulfillment: "Pickup or Ship",
+      allowOffer: true,
+      featured: false,
+      isNew: false,
+      status: "Active",
+      image: "assets/images/product-guitar-bundle.svg",
+      description: "Entertainment bundle that adds variety to the catalog and gives the app a more believable treasure-hunt feel."
+    },
+    {
+      id: "item-village",
+      name: "Holiday Village Set",
+      category: "Home Decor",
+      price: 46,
+      condition: "Like New",
       qty: 1,
       fulfillment: "Pickup or Ship",
       allowOffer: false,
       featured: false,
       isNew: true,
       status: "Active",
-      image: "assets/images/product-charlie-brown.jpg",
-      description: "Another fun one-off collectible. This kind of item helps the app feel like a real treasure-hunt storefront instead of a boring generic catalog."
+      image: "assets/images/product-christmas-village.svg",
+      description: "Seasonal inventory moves fast online when people can save it before it disappears from the floor."
     },
     {
-      id: "item-jacket",
-      name: "Retro Varsity Jacket",
-      category: "Clothing",
-      price: 26,
-      condition: "Good",
-      qty: 1,
-      fulfillment: "Pickup or Ship",
-      allowOffer: true,
-      featured: false,
-      isNew: false,
-      status: "Active",
-      image: "assets/images/placeholder-clothing.jpg",
-      description: "Sample apparel listing to show how clothing could be blended into the same resale catalog without making the app feel cluttered."
-    },
-    {
-      id: "item-decor",
-      name: "Rustic Wall Decor Bundle",
-      category: "Home Decor",
-      price: 31,
+      id: "item-barware",
+      name: "Mid-Century Barware",
+      category: "Housewares",
+      price: 39,
       condition: "Very Good",
       qty: 1,
       fulfillment: "Pickup or Ship",
@@ -206,55 +192,57 @@ function defaultInventory() {
       featured: false,
       isNew: false,
       status: "Active",
-      image: "assets/images/placeholder-decor.jpg",
-      description: "Bundled decor inventory gives Seth a way to move related items together and keep online listings fresh without a ton of extra work."
+      image: "assets/images/product-barware-set.svg",
+      description: "Smaller set with good gift value and clean presentation. Perfect for showing polished item cards in the customer app."
     },
     {
-      id: "item-chair",
-      name: "Painted Accent Chair",
+      id: "item-sideboard",
+      name: "Walnut Sideboard",
       category: "Furniture",
-      price: 58,
+      price: 148,
       condition: "Good",
       qty: 1,
       fulfillment: "Pickup",
       allowOffer: true,
-      featured: false,
-      isNew: true,
+      featured: true,
+      isNew: false,
       status: "Active",
-      image: "assets/images/placeholder-furniture.jpg",
-      description: "Sample furniture card for visual balance. Works well to show pickup workflow, one-of-one inventory tracking, and quick online merchandising."
+      image: "assets/images/product-sideboard.svg",
+      description: "Higher-ticket furniture piece meant to make pickup, offers, and inventory status feel more real in the demo."
     },
     {
-      id: "item-kitchen",
-      name: "Kitchen Starter Bundle",
-      category: "Housewares",
-      price: 24,
+      id: "item-toolbox",
+      name: "Vintage Toolbox",
+      category: "Collectibles",
+      price: 32,
       condition: "Good",
       qty: 1,
       fulfillment: "Pickup or Ship",
-      allowOffer: false,
+      allowOffer: true,
       featured: false,
-      isNew: false,
+      isNew: true,
       status: "Active",
-      image: "assets/images/placeholder-housewares.jpg",
-      description: "Simple household bundle to visualize budget-friendly online listings and impulse checkout from local shoppers."
+      image: "assets/images/product-toolbox.svg",
+      description: "Utility-meets-collectible find that rounds out the mixed resale vibe and gives the catalog more personality."
     }
   ];
 }
+
+
 
 function defaultData() {
   const inventory = defaultInventory();
   return {
     inventory,
     cart: [],
-    wishlist: ["item-helmet", "item-guitar", "item-table"],
+    wishlist: ["item-lamp", "item-wii", "item-sideboard"],
     orders: [
       {
         id: "WLRT-1042",
-        itemIds: ["item-snoopy"],
+        itemIds: ["item-pyrex"],
         customerName: "Taylor Brooks",
         email: "taylor@example.com",
-        total: 22,
+        total: 36,
         status: "Ready for pickup",
         fulfillment: "Pickup",
         date: "2026-03-15",
@@ -262,10 +250,10 @@ function defaultData() {
       },
       {
         id: "WLRT-1038",
-        itemIds: ["item-jacket"],
+        itemIds: ["item-denim"],
         customerName: "Taylor Brooks",
         email: "taylor@example.com",
-        total: 26,
+        total: 28,
         status: "Shipped",
         fulfillment: "Ship",
         date: "2026-03-13",
@@ -273,10 +261,10 @@ function defaultData() {
       },
       {
         id: "WLRT-1031",
-        itemIds: ["item-charlie"],
+        itemIds: ["item-village"],
         customerName: "Taylor Brooks",
         email: "taylor@example.com",
-        total: 18,
+        total: 46,
         status: "Delivered",
         fulfillment: "Ship",
         date: "2026-03-09",
@@ -289,7 +277,7 @@ function defaultData() {
         name: "Taylor Brooks",
         email: "taylor@example.com",
         orders: 3,
-        lifetimeValue: 66,
+        lifetimeValue: 110,
         favoriteCategory: "Collectibles",
         tier: "Repeat shopper"
       },
@@ -298,8 +286,8 @@ function defaultData() {
         name: "Jordan King",
         email: "jordan@example.com",
         orders: 1,
-        lifetimeValue: 89,
-        favoriteCategory: "Housewares",
+        lifetimeValue: 148,
+        favoriteCategory: "Furniture",
         tier: "First order"
       },
       {
@@ -307,8 +295,8 @@ function defaultData() {
         name: "Maria Carter",
         email: "maria@example.com",
         orders: 4,
-        lifetimeValue: 154,
-        favoriteCategory: "Furniture",
+        lifetimeValue: 216,
+        favoriteCategory: "Home Decor",
         tier: "VIP browser"
       }
     ],
@@ -316,7 +304,7 @@ function defaultData() {
       {
         id: "pay-2001",
         orderId: "WLRT-1042",
-        amount: 22,
+        amount: 36,
         method: "Apple Pay",
         status: "Captured",
         date: "2026-03-15"
@@ -324,7 +312,7 @@ function defaultData() {
       {
         id: "pay-1998",
         orderId: "WLRT-1038",
-        amount: 26,
+        amount: 28,
         method: "Visa",
         status: "Captured",
         date: "2026-03-13"
@@ -332,7 +320,7 @@ function defaultData() {
       {
         id: "pay-1988",
         orderId: "WLRT-1031",
-        amount: 18,
+        amount: 46,
         method: "PayPal",
         status: "Captured",
         date: "2026-03-09"
@@ -343,23 +331,23 @@ function defaultData() {
         id: nextId("msg"),
         from: "Store Team",
         audience: "customer",
-        subject: "Pickup ready",
-        body: "Your Snoopy ashtray order is ready for pickup at the front counter.",
+        subject: "Your pickup is ready",
+        body: "Your Pyrex bowl set is ready at the front counter. We will hold it through tomorrow afternoon.",
         time: "10 minutes ago"
       },
       {
         id: nextId("msg"),
         from: "Store Team",
         audience: "customer",
-        subject: "Offer update",
-        body: "We review offers quickly. If you see something you like, send one over and we'll take a look.",
+        subject: "Offer received",
+        body: "Thanks for your offer. We review offers quickly and usually reply the same day.",
         time: "Yesterday"
       },
       {
         id: nextId("msg"),
         from: "Taylor Brooks",
         audience: "admin",
-        subject: "Question about pickup",
+        subject: "Question about pickup time",
         body: "Can I grab my order after 5 PM tomorrow?",
         time: "14 minutes ago"
       },
@@ -367,8 +355,8 @@ function defaultData() {
         id: nextId("msg"),
         from: "Jordan King",
         audience: "admin",
-        subject: "Interested in camp bundle",
-        body: "Is the outdoor bundle still available for pickup this weekend?",
+        subject: "Interested in the sideboard",
+        body: "Is the walnut sideboard still available for pickup this weekend?",
         time: "2 hours ago"
       }
     ],
@@ -393,9 +381,10 @@ function defaultData() {
   };
 }
 
+
 let data = loadData();
 let ui = {
-  portal: null,
+  portal: "customer",
   customerView: "home",
   adminView: "dashboard",
   shopSearch: "",
@@ -446,7 +435,7 @@ function persistData() {
 function resetDemo() {
   data = defaultData();
   ui = {
-    portal: null,
+    portal: "customer",
     customerView: "home",
     adminView: "dashboard",
     shopSearch: "",
@@ -484,7 +473,7 @@ function emptyInventoryForm() {
     featured: false,
     isNew: true,
     status: "Active",
-    image: "assets/images/placeholder-furniture.jpg",
+    image: "assets/images/product-accent-chair.svg",
     description: ""
   };
 }
@@ -740,7 +729,7 @@ function submitOffer(itemId, amount) {
     from: "Store Team",
     audience: "customer",
     subject: `Offer received: ${item.name}`,
-    body: `We received your ${currency(offer)} offer on ${item.name}. Seth can review it from the admin portal.`,
+    body: `We received your ${currency(offer)} offer on ${item.name}. The store owner can review it from the admin portal.`,
     time: "Just now"
   });
   persistData();
@@ -834,7 +823,7 @@ function quickReply(messageId) {
     from: "Store Team",
     audience: "customer",
     subject: `Re: ${message.subject}`,
-    body: "Absolutely — thanks for reaching out. Seth can confirm details and keep the order moving.",
+    body: "Absolutely — thanks for reaching out. We can confirm details and keep the order moving.",
     time: "Just now"
   });
   persistData();
@@ -912,31 +901,39 @@ function toast(title, body) {
   }, 2600);
 }
 
+
 function renderTopbar() {
   const cartBadge = cartCount() ? `<span class="badge gold">${cartCount()} in cart</span>` : "";
+  const customerMode = ui.portal === "customer";
+  const eyebrow = customerMode ? "Shop online • pickup or shipping" : "Store admin portal";
+  const subtitle = customerMode
+    ? "Fresh finds, one-of-a-kind pieces, and simple checkout for local shoppers."
+    : "Inventory, orders, offers, payments, and customer messages in one place.";
   return `
     <header class="topbar">
       <div class="topbar-inner">
         <div class="brand">
           <img class="brand-logo" src="assets/images/logo.png" alt="${APP_NAME} logo" />
           <div class="brand-copy">
-            <p class="eyebrow">Interactive web app demo</p>
+            <p class="eyebrow">${eyebrow}</p>
             <p class="brand-title">${APP_NAME}</p>
-            <p class="brand-subtitle">Customer portal + admin operating system demo for Seth</p>
+            <p class="brand-subtitle">${subtitle}</p>
           </div>
         </div>
         <div class="topbar-actions">
           <div class="portal-toggle">
-            <button class="tab-chip ${ui.portal === "customer" ? "active" : ""}" data-action="switch-portal" data-portal="customer">Customer</button>
+            <button class="tab-chip ${ui.portal === "customer" ? "active" : ""}" data-action="switch-portal" data-portal="customer">Shop</button>
             <button class="tab-chip ${ui.portal === "admin" ? "active" : ""}" data-action="switch-portal" data-portal="admin">Admin</button>
           </div>
-          ${ui.portal === "customer" ? `<button class="btn btn-secondary btn-sm" data-action="open-cart">Cart ${cartBadge}</button>` : ""}
-          <button class="btn btn-outline btn-sm" data-action="reset-demo">Reset Demo</button>
+          ${ui.portal === "customer" ? `<a class="btn btn-secondary btn-sm" href="${MESSENGER_URL}" target="_blank" rel="noreferrer">Message Store</a>` : ""}
+          ${ui.portal === "customer" ? `<button class="btn btn-outline btn-sm" data-action="open-cart">Cart ${cartBadge}</button>` : ""}
+          ${ui.portal === "admin" ? `<button class="btn btn-outline btn-sm" data-action="reset-demo">Reset Demo</button>` : ""}
         </div>
       </div>
     </header>
   `;
 }
+
 
 function renderLogin() {
   const stats = inventoryStats();
@@ -947,8 +944,8 @@ function renderLogin() {
         <article class="hero-card hero-card-photo">
           <div class="hero-content hero-content-wide">
             <p class="eyebrow" style="color: rgba(255,255,255,.84)">Play it like a real business app</p>
-            <h1>Show Seth a resale app that feels like it could run the store — not just sit there looking pretty.</h1>
-            <p>This demo is built to sell the real idea: shoppers can browse live-looking inventory, save favorites, make offers, pay online, and choose pickup or shipping. Seth can jump into the admin side and actually feel how inventory, orders, payments, messages, and new listings could work in one operating system.</p>
+            <h1>Show a resale app that feels like it could run the store — not just sit there looking pretty.</h1>
+            <p>This demo is built to sell the real idea: shoppers can browse live-looking inventory, save favorites, make offers, pay online, and choose pickup or shipping. The owner can jump into the admin side and actually feel how inventory, orders, payments, messages, and new listings could work in one operating system.</p>
             <div class="hero-actions">
               <button class="btn btn-primary" data-action="enter-portal" data-portal="customer">Enter Customer Demo</button>
               <button class="btn btn-outline" data-action="enter-portal" data-portal="admin">Enter Admin Demo</button>
@@ -965,7 +962,7 @@ function renderLogin() {
           <article class="auth-card">
             <p class="eyebrow">How to pitch it</p>
             <h2 style="margin:8px 0 0; font-size:2rem; line-height:1.02; letter-spacing:-.04em;">Use the customer side to hook him. Use the admin side to close him.</h2>
-            <p class="supporting" style="margin-top:14px;">Customer portal shows the buying experience. Admin portal shows the money, control, and operational upside. Together, they make the app feel like something Seth could actually use.</p>
+            <p class="supporting" style="margin-top:14px;">Customer portal shows the buying experience. Admin portal shows the money, control, and operational upside. Together, they make the app feel like something a real store owner could actually use.</p>
             <div class="auth-grid">
               <div class="auth-option">
                 <div>
@@ -998,23 +995,23 @@ function renderLogin() {
           </article>
         </div>
       </div>
-      <p class="footer-note">Demo mode only. Data is simulated and stored locally in this browser so Seth can click around, feel the workflow, and see the business upside.</p>
+      <p class="footer-note">Demo mode only. Data is simulated and stored locally in this browser so you can click around, feel the workflow, and see the business upside.</p>
     </section>
   `;
 }
 
+
 function renderPortalHeader() {
   if (ui.portal === "customer") {
     return `
-      <div class="portal-header">
+      <div class="portal-header customer-header">
         <div class="portal-header-copy">
-          <p class="eyebrow">Shop online, pick up local</p>
-          <h1>Find the good stuff before somebody else grabs it.</h1>
-          <p>Browse what is in the store right now, save favorites, send an offer on one-of-a-kind pieces, and check out for pickup or shipping without chasing inventory through messages.</p>
+          <p class="eyebrow">Fresh finds available now</p>
+          <h1>Browse what is in the shop before somebody else grabs it.</h1>
+          <p>Search current inventory, save favorites, make an offer on select items, and check out for pickup or shipping without chasing listings through social posts and messages.</p>
         </div>
         <div class="stack-actions">
           <button class="btn btn-primary" data-action="set-customer-view" data-view="shop">Shop Inventory</button>
-          <a class="btn btn-secondary" href="${MESSENGER_URL}" target="_blank" rel="noreferrer">Message Store</a>
           <a class="btn btn-outline" href="https://maps.google.com/?q=${encodeURIComponent(STORE_ADDRESS)}" target="_blank" rel="noreferrer">Get Directions</a>
         </div>
       </div>
@@ -1023,28 +1020,30 @@ function renderPortalHeader() {
   return `
     <div class="portal-header">
       <div class="portal-header-copy">
-        <p class="eyebrow">Admin portal demo</p>
-        <h1>Seth’s control center for inventory, online sales, payments, and customer activity.</h1>
-        <p>This side sells the real value. It is built to help a resale store list inventory fast, close online orders without back-and-forth, stay organized, and keep up with the constant rotation of one-of-a-kind items.</p>
+        <p class="eyebrow">Owner dashboard</p>
+        <h1>Run inventory, orders, offers, and customer messages from one clean system.</h1>
+        <p>The admin side is where the app starts feeling operational: list fresh inventory fast, mark sold items, capture orders, coordinate pickup, and keep the online side of the store organized.</p>
       </div>
       <div class="stack-actions">
         <button class="btn btn-secondary" data-action="set-admin-view" data-view="inventory">Add Inventory</button>
-        <button class="btn btn-outline" data-action="set-admin-view" data-view="opportunity">View Opportunity</button>
+        <button class="btn btn-outline" data-action="set-admin-view" data-view="dashboard">Open Dashboard</button>
       </div>
     </div>
   `;
 }
 
+
+
 function renderCustomerNav() {
   const items = [
-    ["home", "Home", "New arrivals, pickup, favorites"],
-    ["shop", "Shop", "Search current inventory"],
+    ["home", "Home", "Fresh finds and featured picks"],
+    ["shop", "Shop", "Browse all inventory"],
     ["orders", "Orders", "Pickup and shipping updates"],
-    ["messages", "Messages", "Store questions and offers"],
-    ["account", "Account", "Profile and saved items"]
+    ["messages", "Messages", "Questions and offer replies"],
+    ["account", "Account", "Saved items and profile"]
   ];
   return `
-    <div class="portal-nav">
+    <div class="portal-nav customer-nav">
       ${items
         .map(
           ([view, label, sub]) => `
@@ -1058,6 +1057,7 @@ function renderCustomerNav() {
     </div>
   `;
 }
+
 
 function renderAdminNav() {
   const items = [
@@ -1087,21 +1087,26 @@ function renderAdminNav() {
   `;
 }
 
+
 function renderKpis() {
   const stats = inventoryStats();
   const ordersToday = data.orders.filter((order) => order.date === new Date().toISOString().slice(0, 10)).length;
   return `
     <div class="kpi-grid">
-      <div class="kpi-card"><h3>Active Listings</h3><strong>${stats.activeCount}</strong><span>Visible in the current storefront demo</span></div>
-      <div class="kpi-card"><h3>Inventory Value</h3><strong>${currency(stats.totalValue)}</strong><span>Total shown across live sample inventory</span></div>
-      <div class="kpi-card"><h3>Orders</h3><strong>${data.orders.length}</strong><span>${ordersToday} created today in demo mode</span></div>
-      <div class="kpi-card"><h3>Revenue Signal</h3><strong>${currency(data.payments.reduce((sum, p) => sum + Number(p.amount), 0))}</strong><span>Captured demo payments already flowing through the app</span></div>
+      <div class="kpi-card"><h3>Active listings</h3><strong>${stats.activeCount}</strong><span>Visible in the live storefront right now</span></div>
+      <div class="kpi-card"><h3>Inventory value</h3><strong>${currency(stats.totalValue)}</strong><span>Total listed value across the current catalog</span></div>
+      <div class="kpi-card"><h3>Orders</h3><strong>${data.orders.length}</strong><span>${ordersToday} moved today</span></div>
+      <div class="kpi-card"><h3>Payments captured</h3><strong>${currency(data.payments.reduce((sum, p) => sum + Number(p.amount), 0))}</strong><span>Tracked through the owner portal</span></div>
     </div>
   `;
 }
 
+
+
 function renderProductCard(item) {
   const inWishlist = data.wishlist.includes(item.id);
+  const qtyNote = Number(item.qty) === 1 ? "Only 1 available" : `${item.qty} available`;
+  const fulfillmentCopy = item.fulfillment === "Pickup" ? "Pickup available" : item.fulfillment === "Ship" ? "Ships in 1–2 days" : "Pickup or shipping";
   return `
     <article class="product-card">
       <div class="product-image-wrap">
@@ -1110,9 +1115,8 @@ function renderProductCard(item) {
       <div class="product-body">
         <div class="badge-row">
           <span class="badge">${escapeHtml(item.category)}</span>
-          ${item.isNew ? `<span class="badge gold">New arrival</span>` : ""}
+          ${item.isNew ? `<span class="badge gold">New this week</span>` : ""}
           ${item.allowOffer ? `<span class="badge dark">Make offer</span>` : ""}
-          ${Number(item.qty) <= 0 ? `<span class="badge danger">Sold out</span>` : ""}
         </div>
         <div>
           <h3 class="product-title">${escapeHtml(item.name)}</h3>
@@ -1120,13 +1124,13 @@ function renderProductCard(item) {
         </div>
         <div class="meta-row">
           <span class="small-chip">${escapeHtml(item.condition)}</span>
-          <span class="small-chip">${escapeHtml(item.fulfillment)}</span>
-          <span class="small-chip">Qty ${item.qty}</span>
+          <span class="small-chip">${fulfillmentCopy}</span>
+          <span class="small-chip">${qtyNote}</span>
         </div>
         <div class="price-row">
           <div>
             <div class="price">${currency(item.price)}</div>
-            <div class="price-note">One-of-a-kind resale item</div>
+            <div class="price-note">${item.allowOffer ? "Make an offer on this one" : "Fixed-price listing"}</div>
           </div>
         </div>
         <div class="product-actions">
@@ -1140,86 +1144,83 @@ function renderProductCard(item) {
   `;
 }
 
+
+
 function renderCustomerHome() {
   const featured = getFeaturedInventory();
   const arrivals = getNewArrivals();
   const savedItems = data.wishlist.map((id) => getInventoryById(id)).filter(Boolean).slice(0, 3);
   return `
-    <div class="home-grid">
-      <section class="feature-panel panel feature-panel-photo">
-        <div class="feature-bg"></div>
-        <div class="feature-content">
-          <div>
-            <p class="eyebrow" style="color: rgba(255,255,255,.86)">Fresh finds added all the time</p>
-            <h2>See what is in the store before you make the drive.</h2>
-            <p>Browse one-of-a-kind resale pieces, save your favorites, send an offer on select items, and check out for pickup or shipping before the good stuff disappears.</p>
-          </div>
-          <div class="hero-actions">
-            <button class="btn btn-primary" data-action="set-customer-view" data-view="shop">Shop all items</button>
-            <button class="btn btn-outline" data-action="set-shop-category" data-category="Fresh Finds">View new arrivals</button>
-          </div>
+    <section class="shop-hero card">
+      <div class="shop-hero-media"></div>
+      <div class="shop-hero-content">
+        <p class="eyebrow" style="color: rgba(255,255,255,.84)">Fresh finds this week</p>
+        <h1>Treasure-hunt shopping, made easier.</h1>
+        <p>See what is worth the stop before you drive over. Browse current inventory, save favorites, send an offer on select finds, and check out for pickup or shipping.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" data-action="set-customer-view" data-view="shop">Shop inventory</button>
+          <a class="btn btn-outline" href="${MESSENGER_URL}" target="_blank" rel="noreferrer">Ask about an item</a>
         </div>
-      </section>
-      <section class="card live-card">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">Why shoppers will use this</p>
-            <h2>Easy to browse. Easy to buy.</h2>
-          </div>
+        <div class="trust-strip">
+          <div class="trust-chip">New arrivals added often</div>
+          <div class="trust-chip">Pickup or shipping</div>
+          <div class="trust-chip">Offers on select items</div>
+          <div class="trust-chip">One-of-a-kind inventory</div>
         </div>
-        <div class="live-metric-grid">
-          <div class="live-metric"><strong>${featured.length}</strong><span>featured finds live now</span></div>
-          <div class="live-metric"><strong>${arrivals.length}</strong><span>recently added items</span></div>
-          <div class="live-metric"><strong>Pickup</strong><span>available on store-floor items</span></div>
-          <div class="live-metric"><strong>Offers</strong><span>enabled on select listings</span></div>
-        </div>
-        <div class="detail-list" style="margin-top:16px;">
-          <div class="detail-item"><div><div class="detail-label">Save favorites</div><strong>Keep track of the items you want before they are gone</strong></div><span class="badge dark">Quick</span></div>
-          <div class="detail-item"><div><div class="detail-label">Checkout your way</div><strong>Buy online for pickup or shipping without waiting on back-and-forth messages</strong></div><span class="badge gold">Convenient</span></div>
-        </div>
-      </section>
-    </div>
+      </div>
+    </section>
 
-    <section class="card" style="margin-top:20px;">
+    <section class="card section-spaced">
       <div class="section-head">
         <div>
-          <p class="eyebrow">Start here</p>
-          <h2>Fresh finds shoppers would click first</h2>
+          <p class="eyebrow">Featured now</p>
+          <h2>Good stuff shoppers would click first.</h2>
         </div>
-        <button class="btn btn-outline btn-sm" data-action="set-customer-view" data-view="shop">Shop all inventory</button>
+        <button class="btn btn-outline btn-sm" data-action="set-customer-view" data-view="shop">View all inventory</button>
       </div>
       <div class="product-grid product-grid-strong">
         ${featured.map(renderProductCard).join("")}
       </div>
     </section>
 
-    <section class="card" style="margin-top:20px;">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">How it works</p>
-          <h2>Simple shopping flow for real customers</h2>
+    <section class="story-grid section-spaced">
+      <article class="card">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Why this works</p>
+            <h2>Built for how resale shoppers actually buy.</h2>
+          </div>
         </div>
-      </div>
-      <div class="detail-grid how-grid">
-        <div class="small-panel"><strong>1. Browse what is here now</strong><span>Search categories, open details, and save favorites without guessing what made it to the floor.</span></div>
-        <div class="small-panel"><strong>2. Buy now or send an offer</strong><span>Perfect for one-of-a-kind thrift inventory where timing matters and some prices have room to move.</span></div>
-        <div class="small-panel"><strong>3. Pick up or ship</strong><span>Fast checkout makes it easy to lock in the item and choose the easiest way to get it.</span></div>
-      </div>
+        <div class="detail-grid how-grid">
+          <div class="small-panel"><strong>Browse before the drive</strong><span>Customers can see what is in the shop right now instead of hoping the trip pays off.</span></div>
+          <div class="small-panel"><strong>Buy now or send an offer</strong><span>Perfect for one-of-a-kind resale inventory where some items need speed and others need flexibility.</span></div>
+          <div class="small-panel"><strong>Pickup or ship</strong><span>Simple checkout helps lock in the sale while the item is still available.</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Saved for later</p>
+            <h2>Favorites waiting in the account portal.</h2>
+          </div>
+        </div>
+        ${savedItems.length ? `<div class="product-grid product-grid-compact">${savedItems.map(renderProductCard).join("")}</div>` : `<div class="empty-state">Save a few items and they will show up here for quick return visits.</div>`}
+      </article>
     </section>
 
-    <section class="card" style="margin-top:20px;">
+    <section class="card section-spaced">
       <div class="section-head">
         <div>
           <p class="eyebrow">Shop by category</p>
-          <h2>Mixed thrift, organized in a way that makes sense</h2>
+          <h2>Mixed inventory, organized clearly.</h2>
         </div>
       </div>
       <div class="category-grid">
         ${[
-          ["Furniture", "Large pieces and pickup-friendly finds", "assets/images/placeholder-furniture.jpg"],
-          ["Home Decor", "Quirky, giftable, fun to browse", "assets/images/placeholder-decor.jpg"],
-          ["Collectibles", "Pop culture, sports, and one-off pieces", "assets/images/display-case.jpg"],
-          ["Housewares", "Kitchen, glassware, and practical finds", "assets/images/placeholder-housewares.jpg"]
+          ["Furniture", "Large pieces and pickup-friendly finds", "assets/images/category-furniture.svg"],
+          ["Home Decor", "Lamps, art, accents, and giftable pieces", "assets/images/category-decor.svg"],
+          ["Collectibles", "Sports, vintage media, and nostalgic finds", "assets/images/category-collectibles.svg"],
+          ["Housewares", "Kitchen, glassware, cookware, and practical finds", "assets/images/category-housewares.svg"]
         ]
           .map(
             ([name, copy, image]) => `
@@ -1236,22 +1237,11 @@ function renderCustomerHome() {
       </div>
     </section>
 
-    <section class="card" style="margin-top:20px;">
+    <section class="card section-spaced">
       <div class="section-head">
         <div>
-          <p class="eyebrow">Saved for later</p>
-          <h2>Your favorites</h2>
-        </div>
-        <button class="btn btn-outline btn-sm" data-action="set-customer-view" data-view="account">Open account</button>
-      </div>
-      ${savedItems.length ? `<div class="product-grid product-grid-strong">${savedItems.map(renderProductCard).join("")}</div>` : `<div class="empty-state">Save a few items and they will show up here for quick return visits.</div>`}
-    </section>
-
-    <section class="card" style="margin-top:20px;">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Just added</p>
-          <h2>Recently added inventory</h2>
+          <p class="eyebrow">Recently added</p>
+          <h2>Fresh listings worth checking now.</h2>
         </div>
       </div>
       <div class="product-grid product-grid-strong">
@@ -1261,6 +1251,8 @@ function renderCustomerHome() {
   `;
 }
 
+
+
 function renderCustomerShop() {
   const items = getFilteredInventory();
   return `
@@ -1268,11 +1260,11 @@ function renderCustomerShop() {
       <div class="section-head">
         <div>
           <p class="eyebrow">Browse inventory</p>
-          <h2>Shop what is currently available.</h2>
-          <p class="supporting">One-of-a-kind pieces move fast. Use search and categories to narrow in on what you want, then save it, send an offer, or check out before it is gone.</p>
+          <h2>Shop what is available right now.</h2>
+          <p class="supporting">Use search and category filters to narrow down the catalog, then save, offer, or check out before someone else beats you to it.</p>
         </div>
         <div class="filter-row">
-          <div class="search-wrap"><input id="shop-search" type="search" placeholder="Search inventory" value="${escapeHtml(ui.shopSearch)}" /></div>
+          <div class="search-wrap"><input id="shop-search" type="search" placeholder="Search furniture, decor, collectibles..." value="${escapeHtml(ui.shopSearch)}" /></div>
         </div>
       </div>
       <div class="filter-row" style="margin-bottom:18px;">
@@ -1288,6 +1280,7 @@ function renderCustomerShop() {
     </section>
   `;
 }
+
 
 function renderOrderCard(order) {
   const items = order.itemIds.map((id) => getInventoryById(id)?.name || "Inventory item").join(", ");
@@ -1307,7 +1300,7 @@ function renderOrderCard(order) {
         <div class="detail-item"><div class="detail-label">Placed</div><strong>${escapeHtml(order.date)}</strong></div>
       </div>
       <div class="product-actions" style="margin-top:16px;">
-        <button class="btn btn-outline btn-sm" data-action="reorder-item" data-id="${reorderId}">Reorder similar</button>
+        <button class="btn btn-outline btn-sm" data-action="reorder-item" data-id="${reorderId}">Buy similar</button>
         <a class="btn btn-secondary btn-sm" href="${MESSENGER_URL}" target="_blank" rel="noreferrer">Message Store</a>
       </div>
     </article>
@@ -1396,6 +1389,7 @@ function renderCustomerAccount() {
   `;
 }
 
+
 function renderCustomerPortal() {
   const content = {
     home: renderCustomerHome(),
@@ -1407,12 +1401,13 @@ function renderCustomerPortal() {
   }[ui.customerView];
   return `
     <div class="portal-shell screen">
-      ${renderPortalHeader()}
+      ${ui.customerView === "home" ? "" : renderPortalHeader()}
       ${renderCustomerNav()}
       ${content}
     </div>
   `;
 }
+
 
 function renderAdminDashboard() {
   const stats = inventoryStats();
@@ -1425,7 +1420,7 @@ function renderAdminDashboard() {
         <div class="section-head">
           <div>
             <p class="eyebrow">Live today dashboard</p>
-            <h2>This is the screen that should make Seth say, “yeah, I could actually use this.”</h2>
+            <h2>A clean owner dashboard that makes the app feel operational right away.</h2>
           </div>
           <span class="badge gold">Owner view</span>
         </div>
@@ -1436,7 +1431,7 @@ function renderAdminDashboard() {
           <div class="live-big-stat"><span>Pickup due</span><strong>${today.pickupReady}</strong><small>Orders needing pickup coordination</small></div>
         </div>
         <div class="detail-grid today-actions-grid" style="margin-top:20px;">
-          <div class="small-panel"><strong>Add new floor items fast</strong><span>As soon as something interesting comes in, Seth can list it, feature it, and start collecting demand online.</span></div>
+          <div class="small-panel"><strong>Add new floor items fast</strong><span>As soon as something interesting comes in, New finds can be listed, featured, and exposed to demand online the same day.</span></div>
           <div class="small-panel"><strong>Close after-hours sales</strong><span>The app keeps working when the shop is closed, which means more chances to capture the easy yes.</span></div>
           <div class="small-panel"><strong>Keep the chaos organized</strong><span>Orders, payments, questions, offers, and inventory status stop living in random posts and DMs.</span></div>
         </div>
@@ -1495,7 +1490,7 @@ function renderAdminDashboard() {
           <div class="section-head">
             <div>
               <p class="eyebrow">Today at a glance</p>
-              <h2>What Seth would care about first.</h2>
+              <h2>What the store owner would care about first.</h2>
             </div>
           </div>
           <div class="detail-list">
@@ -1823,7 +1818,7 @@ function renderAdminAnalytics() {
         </div>
       </section>
       <section class="analytics-card">
-        <div class="section-head"><div><p class="eyebrow">What to tell Seth</p><h2>Strong pitch angles</h2></div></div>
+        <div class="section-head"><div><p class="eyebrow">Business upside</p><h2>Strong pitch angles</h2></div></div>
         <div class="detail-list">
           <div class="detail-item"><div class="detail-label">Speed</div><strong>List fresh inventory without waiting on Facebook posts</strong></div>
           <div class="detail-item"><div class="detail-label">Conversion</div><strong>Let customers check out immediately when they see something</strong></div>
@@ -1843,7 +1838,7 @@ function renderAdminOpportunity() {
     <div class="analytics-grid opportunity-grid">
       <section class="analytics-card opportunity-hero">
         <div class="section-head"><div><p class="eyebrow">Why this matters</p><h2>This is the money view.</h2></div><span class="badge gold">Sales tool</span></div>
-        <p class="supporting">This screen exists to help Seth connect the dots fast: the app is not just about looking modern. It gives customers a cleaner way to buy, gives the store a better way to manage one-of-a-kind inventory, and gives the business a shot at capturing sales that normally die in messages or after-hours browsing.</p>
+        <p class="supporting">This screen exists to connect the dots fast: the app is not just about looking modern. It gives customers a cleaner way to buy, gives the store a better way to manage one-of-a-kind inventory, and gives the business a shot at capturing sales that normally die in messages or after-hours browsing.</p>
         <div class="quick-grid opportunity-mini-grid" style="margin-top:18px;">
           <div class="small-panel"><strong>24/7 browsing</strong><span>Customers can shop after the store is closed and still complete a checkout.</span></div>
           <div class="small-panel"><strong>Less manual back-and-forth</strong><span>Inventory, offers, and order updates stop living in random message threads.</span></div>
@@ -1856,7 +1851,7 @@ function renderAdminOpportunity() {
         <div class="detail-list">
           <div class="detail-item"><div><div class="detail-label">Average order in this demo</div><strong>${currency(avgOrder)}</strong></div><span class="badge dark">Based on sample orders</span></div>
           <div class="detail-item"><div><div class="detail-label">If the app captures 8 extra orders / month</div><strong>${currency(demoLift)} / month</strong></div><span class="badge gold">Small win</span></div>
-          <div class="detail-item"><div><div class="detail-label">If Seth turns this into 15 extra orders / month</div><strong>${currency(strongerLift)} / month</strong></div><span class="badge success">More realistic upside</span></div>
+          <div class="detail-item"><div><div class="detail-label">If the store turns this into 15 extra orders / month</div><strong>${currency(strongerLift)} / month</strong></div><span class="badge success">More realistic upside</span></div>
           <div class="detail-item"><div><div class="detail-label">That same 8-order pace across a year</div><strong>${currency(annualLift)} / year</strong></div><span class="badge success">Adds up</span></div>
         </div>
       </section>
@@ -1872,7 +1867,7 @@ function renderAdminOpportunity() {
       </section>
 
       <section class="analytics-card">
-        <div class="section-head"><div><p class="eyebrow">What Seth gets</p><h2>Core owner benefits</h2></div></div>
+        <div class="section-head"><div><p class="eyebrow">What the owner gets</p><h2>Core owner benefits</h2></div></div>
         <div class="detail-list">
           <div class="detail-item"><div class="detail-label">Inventory control</div><strong>List, edit, feature, or mark sold from one admin dashboard</strong></div>
           <div class="detail-item"><div class="detail-label">Sales control</div><strong>Buy now, make offer, pickup or ship — all in one flow</strong></div>
@@ -1965,7 +1960,7 @@ function renderAdminSettings() {
         <article class="settings-card">
           <h3>Reality check</h3>
           <p>This demo is front-end only right now. A real build would connect inventory, auth, and payments to a backend.</p>
-          <div class="notice" style="margin-top:14px;">That is exactly fine for this stage. The goal is for Seth to feel the system, not get buried in technical details.</div>
+          <div class="notice" style="margin-top:14px;">That is exactly fine for this stage. The goal is to feel the system, not get buried in technical details.</div>
         </article>
       </div>
     </section>
@@ -2021,7 +2016,7 @@ function renderCheckoutScreen() {
             </label>
             <label class="full"><textarea class="textarea" data-checkout-field="notes" placeholder="Pickup notes or delivery notes">${escapeHtml(ui.checkoutForm.notes)}</textarea></label>
           </div>
-        ` : `<div class="empty-state">Your cart is empty. Add a few items first so Seth can see the checkout flow.</div>`}
+        ` : `<div class="empty-state">Your cart is empty. Add a few items first to test the checkout flow.</div>`}
       </section>
       <section class="checkout-card">
         <div class="checkout-head">
@@ -2153,7 +2148,7 @@ function renderDrawer() {
                 </div>
               </div>
             </div>
-          `).join("") : `<div class="empty-state">Add a few inventory items so Seth can test the cart and checkout flow.</div>`}
+          `).join("") : `<div class="empty-state">Add a few items to the cart to test the checkout flow.</div>`}
         </div>
         <div class="drawer-footer">
           <div class="checkout-line"><span>Subtotal</span><strong>${currency(cartTotal())}</strong></div>
@@ -2165,10 +2160,15 @@ function renderDrawer() {
   `;
 }
 
+
 function renderApp() {
-  if (!ui.portal) return renderLogin();
+  if (!ui.portal) {
+    ui.portal = "customer";
+    ui.customerView = "home";
+  }
   return ui.portal === "customer" ? renderCustomerPortal() : renderAdminPortal();
 }
+
 
 function render() {
   const app = document.getElementById("app");

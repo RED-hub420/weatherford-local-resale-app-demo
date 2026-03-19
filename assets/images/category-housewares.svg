@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="700" viewBox="0 0 1400 700">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#eef5f2"/><stop offset="100%" stop-color="#fffaf5"/></linearGradient></defs>
+<rect width="1400" height="700" rx="42" fill="url(#bg)"/>
+<circle cx="1160" cy="120" r="140" fill="#5f947e" opacity="0.20"/>
+<circle cx="1270" cy="610" r="180" fill="#25463c" opacity="0.10"/>
+<rect x="90" y="88" width="180" height="44" rx="22" fill="#25463c" opacity="0.10"/>
+<text x="180" y="117" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#25463c">Browse</text>
+<text x="90" y="286" font-family="Inter, Arial, sans-serif" font-size="88" font-weight="800" fill="#25463c">Housewares</text>
+<text x="90" y="370" font-family="Inter, Arial, sans-serif" font-size="36" fill="#25463c" opacity="0.74">Kitchen, glassware, cookware, and practical finds</text>
+<rect x="90" y="510" width="280" height="70" rx="35" fill="#25463c" opacity="0.9"/>
+<text x="230" y="556" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700" fill="white">Shop Housewares</text>
+</svg>
